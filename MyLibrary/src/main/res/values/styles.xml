@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--透明Activity, 适用于DragPhotoView的Activity-->
+    <style name="translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+    <!--加入清除图标-->
+    <style name="styleClear">
+        <item name="funcType">canClear</item>
+    </style>
+
+    <!--加入密码可见图标-->
+    <style name="stylePassword">
+        <item name="funcType">canWatchPwd</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+    <!--手机号-->
+    <style name="stylePhone" parent="styleClear"/>
+
+    <!--银行卡-->
+    <style name="styleBankCard" parent="styleClear">
+        <item name="android:digits">012345 6789</item>
+    </style>
+</resources>

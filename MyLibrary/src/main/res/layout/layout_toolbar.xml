@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:visibility="gone">
+
+    <!--因为左边总会空出一定距离,所以在title和右边按钮paddingRight 16dp-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/btn_toolbar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_toolBar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingRight="16dp"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/btn_toolBar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingRight="16dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>
