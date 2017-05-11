@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.riq.utilslib.utils.Lcat;
 import com.riq.utilslib.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -25,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.tv)
     public void onViewClicked() {
         ToastUtils.showToast(this,"ssss");
+        Lcat.print("s");
     }
 }
