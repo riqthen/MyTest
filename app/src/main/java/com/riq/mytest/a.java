@@ -5,4 +5,5 @@ package com.riq.mytest;
  */
 
 public class a {
+
 }
