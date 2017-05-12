@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
-import com.riq.utilslib.R;
+import com.riq.mylibrary.R;
 
 
 /**

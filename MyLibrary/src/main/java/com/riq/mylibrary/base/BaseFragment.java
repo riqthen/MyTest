@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.riq.utilslib.R;
+import com.riq.mylibrary.R;
+
 
 public abstract class BaseFragment extends Fragment {
 

@@ -1,28 +1,29 @@
 package com.riq.mylibrary.utils;
 
-import com.github.lazylibrary.util.StringUtils;
+
+import android.text.TextUtils;
 
 import java.util.Random;
 
 /**
  * Created by riq on 2017/5/10.
- * 随机数工具类
+ * TODO 随机数工具类
  */
 
 public class RandomUtils {
 
-    public static final String NUMBERS_AND_LETTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String NUMBERS = "0123456789";
-    public static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+    private static final String NUMBERS_AND_LETTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String NUMBERS = "0123456789";
+    private static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
 
     private RandomUtils() {
         throw new AssertionError();
     }
 
     /**
-     * 随机获取length长度个字符
+     * TODO: 随机获取length长度个字符
      * 数字,大写字母,小写字母
      *
      * @param length length
@@ -33,7 +34,7 @@ public class RandomUtils {
     }
 
     /**
-     * 随机获取length长度个 数字
+     * TODO: 随机获取length长度个 数字
      *
      * @param length 字符长度
      * @return RandomUtils
@@ -43,7 +44,7 @@ public class RandomUtils {
     }
 
     /**
-     * 随机获取length长度个 字母（无论大小写）
+     * TODO: 随机获取length长度个 字母（无论大小写）
      *
      * @param length length
      * @return RandomUtils
@@ -53,7 +54,7 @@ public class RandomUtils {
     }
 
     /**
-     * 随机获取length长度个 大写字母
+     * TODO: 随机获取length长度个 大写字母
      *
      * @param length length
      * @return ADSFY
@@ -63,7 +64,7 @@ public class RandomUtils {
     }
 
     /**
-     * 随机获取length长度个 小写字母
+     * TODO: 随机获取length长度个 小写字母
      *
      * @param length length
      * @return fdsfs
@@ -80,7 +81,7 @@ public class RandomUtils {
      * @return get a fixed-length random string, its a mixture of chars in source
      */
     public static String getRandom(String source, int length) {
-        return StringUtils.isEmpty(source) ? null : getRandom(source.toCharArray(), length);
+        return TextUtils.isEmpty(source) ? null : getRandom(source.toCharArray(), length);
     }
 
     /**
@@ -104,8 +105,9 @@ public class RandomUtils {
 
 
     /**
+     * TODO: 获取随机自然数
      * @param max 接收的数值
-     * @return 返回一个随机的数值[0, max)
+     * @return 返回一个随机的数字[0, max)
      */
     public static int getRandom(int max) {
         return getRandom(0, max);
@@ -113,6 +115,7 @@ public class RandomUtils {
 
 
     /**
+     * TODO: 在[min, max)范围内获取随机整数
      * @param min 最小
      * @param max 最大
      * @return 返回一个范围的数值[min, max)
@@ -168,11 +171,11 @@ public class RandomUtils {
      * @param intArray 数组
      * @return 洗牌之后
      */
-    public static int[] shuffle(int[] intArray, boolean lengthStable) {
+    public static int[] shuffle(int[] intArray, boolean includeChildArray) {
         if (intArray == null) {
             return null;
         }
-        if (!lengthStable) {
+        if (includeChildArray) {
             return shuffle(intArray, getRandom(intArray.length));
         } else {
             return shuffle(intArray, intArray.length);

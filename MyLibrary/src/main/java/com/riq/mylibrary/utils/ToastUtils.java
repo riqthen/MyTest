@@ -7,7 +7,8 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.riq.utilslib.R;
+import com.riq.mylibrary.R;
+
 
 /**
  * Created by riq on 2017/5/11.

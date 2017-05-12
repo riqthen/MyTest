@@ -28,4 +28,14 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    //butterknife 不起作用
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.github.andyxialm:ColorDialog:1.0.0'    //ColorDialog --> https://github.com/andyxialm/ColorDialog
+    compile 'com.afollestad.material-dialogs:commons:0.9.4.4'    //material-dialogs --> https://github.com/afollestad/material-dialogs#coloring-radio-buttons
+    compile 'com.github.lazylibrary:lazylibrary:1.0.2'  //常用的工具类 --> https://github.com/l123456789jy/Lazy
+
 }

@@ -12,8 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.riq.utilslib.R;
-
+import com.riq.mylibrary.R;
 
 public class PhoneEditText extends PowerfulEditText implements View.OnFocusChangeListener {
     private int lastLength = 0;

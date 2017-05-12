@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.riq.utilslib.R;
+import com.riq.mylibrary.R;
 
 import butterknife.ButterKnife;
 

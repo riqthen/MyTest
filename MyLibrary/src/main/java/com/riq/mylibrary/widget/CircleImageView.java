@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.riq.utilslib.R;
+import com.riq.mylibrary.R;
 
 
 /**
