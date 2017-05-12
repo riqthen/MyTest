@@ -19,7 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- * @author Created by ql on 2016/11/8.
+ * @author Created by riqthen on 2016/11/8.
  */
 public class FileUtils {
     /**
@@ -28,7 +28,7 @@ public class FileUtils {
      * @param path
      */
     public static void createFolder(String path) {
-        File file = null;
+        File file;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + path);
             if (!file.exists()) {
@@ -92,7 +92,7 @@ public class FileUtils {
             e1.printStackTrace();
         }
         BufferedReader reader = new BufferedReader(inputStreamReader);
-        StringBuffer sb = new StringBuffer("");
+        StringBuilder sb = new StringBuilder("");
         String line;
         try {
             while ((line = reader.readLine()) != null) {
@@ -119,6 +119,7 @@ public class FileUtils {
         } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
+        assert inputStreamReader != null;
         BufferedReader reader = new BufferedReader(inputStreamReader);
         ArrayList<String> str = new ArrayList<>();
         String line;
@@ -138,7 +139,7 @@ public class FileUtils {
      * TODO　保存图片到手机
      * @param path     保存在手机的路径 /storage/emulated/0/
      * @param fileName 文件名（需要扩展名,png,jpg...）
-     * @param bmp
+     * @param bmp bitmap
      */
     public static void saveToStorage(String path, String fileName, Bitmap bmp) {
         FileOutputStream fos = null;
