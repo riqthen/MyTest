@@ -26,7 +26,6 @@ public class Lcat {
     }
 
     public static void print(String tag, String s) {
-
         if (!IS_DEBUG) {
             return;
         }
