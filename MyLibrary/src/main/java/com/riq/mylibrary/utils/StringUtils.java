@@ -6,7 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
 /**
- * Created by 10903 on 2017/5/11.
+ * Created by riq on 2017/5/11.
+ * 字符串工具
  */
 
 public class StringUtils {
@@ -50,7 +51,7 @@ public class StringUtils {
      * @param text 文本
      * @return
      */
-    public static boolean isNumber(String text) {
+    public static boolean isNaturalNumber(String text) {
         if (text.equals("")) {
             return false;
         } else
@@ -67,15 +68,15 @@ public class StringUtils {
         return Pattern.compile("[a-zA-Z]").matcher(text).matches();
     }
 
-//    /**
-//     * TODO 判断文本是否为汉字
-//     *
-//     * @param text 文本
-//     * @return
-//     */
-//    public static boolean isHanzi(String text) {
-//        return Pattern.compile(" [\u4e00-\u9fa5]").matcher(text).matches();
-//    }
+    /**
+     * TODO 判断文本是否为汉字(只能判断一个字)
+     *
+     * @param text 文本
+     * @return
+     */
+    public static boolean isHanzi(String text) {
+        return Pattern.compile("[\u4e00-\u9fa5]").matcher(text).matches();
+    }
 
     /**
      * TODO 将文本转为 UTF-8
