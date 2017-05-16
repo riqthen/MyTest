@@ -77,6 +77,5 @@ public class ContactUtil {
 
     public static void getContact(Activity activity, int requestCode) {
         activity.startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), requestCode);
-
     }
 }
