@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.riq.mylibrary.utils.Lcat;
-import com.riq.mylibrary.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    int b = 0;
+
     @OnClick({R.id.btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn:
-                String text = et.getText().toString();
-                Lcat.print(StringUtils.isNaturalNumber(text));
-                Lcat.print(StringUtils.isHanzi(text));
+                Lcat.print(++b);    //1
                 break;
         }
     }
