@@ -18,8 +18,8 @@ import android.widget.TextView;
  *
  * @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
  * switch (requestCode) {
- * case 0x100:
- * setContact(this, data, etName, etPhone);
+ * case 0x100:  (对应getContact(this, 0x100))
+ * setContact(this, data, etName, etPhone...);
  * break;
  * }
  * super.onActivityResult(requestCode, resultCode, data);
@@ -75,8 +75,8 @@ public class ContactUtil {
         return contact;
     }
 
-    public static void getContact(Activity activity) {
-        activity.startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0x100);
+    public static void getContact(Activity activity, int requestCode) {
+        activity.startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), requestCode);
 
     }
 }

@@ -66,7 +66,7 @@ public class Main4Activity extends AppCompatActivity {
 
     @PermissionGrant(0x1)
     public void getPermission() {
-        getContact(this);
+        getContact(this, 0x100);
     }
 
 }
