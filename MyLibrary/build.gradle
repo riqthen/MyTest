@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -37,5 +36,7 @@ dependencies {
     compile 'com.github.andyxialm:ColorDialog:1.0.0'    //ColorDialog --> https://github.com/andyxialm/ColorDialog
     compile 'com.afollestad.material-dialogs:commons:0.9.4.4'    //material-dialogs --> https://github.com/afollestad/material-dialogs#coloring-radio-buttons
     compile 'com.github.lazylibrary:lazylibrary:1.0.2'  //常用的工具类 --> https://github.com/l123456789jy/Lazy
+    compile 'com.zhy:mpermission-api:1.0.0'
+    compile 'com.zhy:mpermission-compiler:1.0.0'
 
 }
