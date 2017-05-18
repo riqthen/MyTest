@@ -187,6 +187,24 @@ public class Lcat {
         String lineIndicator = getLineIndicator();
         Log.println(PRIORITY, "---->" + tag, "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(doubles));
     }
+    //----------->  byte[]
+    public static void print(byte[] bytes) {
+        if (!IS_DEBUG) {
+            return;
+        }
+        String threadName = Thread.currentThread().getName();
+        String lineIndicator = getLineIndicator();
+        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(bytes));
+    }
+
+    public static void print(String tag, byte[] bytes) {
+        if (!IS_DEBUG) {
+            return;
+        }
+        String threadName = Thread.currentThread().getName();
+        String lineIndicator = getLineIndicator();
+        Log.println(PRIORITY, "---->" + tag, "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(bytes));
+    }
 
 
     //----------->  Object[]
