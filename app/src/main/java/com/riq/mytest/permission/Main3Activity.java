@@ -36,6 +36,13 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         MPermissions.requestPermissions(this, 0x1, READ_PHONE_STATE);
+        int i = 0;
+        Lcat.print(++i);
+        int b = 0;
+        Lcat.print(b++);
+        int c = 0;
+        c = c + 1;
+        Lcat.print(c);
     }
 
     public void requestStorage(View view) {

@@ -22,7 +22,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + s);
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + s);
     }
 
     public static void print(String tag, String s) {
@@ -41,7 +41,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + o.toString());
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + o.toString());
     }
 
     public static void print(String tag, Object o) {
@@ -61,7 +61,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + i);
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + i);
     }
 
     public static void print(String tag, int i) {
@@ -81,7 +81,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + d);
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + d);
     }
 
     public static void print(String tag, double d) {
@@ -101,7 +101,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + l);
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + l);
     }
 
     public static void print(String tag, long l) {
@@ -119,7 +119,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + b);
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + b);
     }
 
     public static void print(String tag, boolean b) {
@@ -138,7 +138,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(strings));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(strings));
     }
 
     public static void print(String tag, String[] strings) {
@@ -157,7 +157,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(ints));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(ints));
     }
 
     public static void print(String tag, int[] ints) {
@@ -176,7 +176,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(doubles));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(doubles));
     }
 
     public static void print(String tag, double[] doubles) {
@@ -194,7 +194,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(bytes));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(bytes));
     }
 
     public static void print(String tag, byte[] bytes) {
@@ -214,7 +214,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(objects));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(objects));
     }
 
     public static void print(String tag, Object[] objects) {
@@ -233,7 +233,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(longs));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + Arrays.toString(longs));
     }
 
     public static void print(String tag, Long[] longs) {
@@ -252,7 +252,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(list));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(list));
     }
 
     public static <T> void print(String tag, List<T> list) {
@@ -271,7 +271,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(set));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(set));
     }
 
     public static <T> void print(String tag, Set<T> set) {
@@ -290,7 +290,7 @@ public class Lcat {
         }
         String threadName = Thread.currentThread().getName();
         String lineIndicator = getLineIndicator();
-        Log.println(PRIORITY, "----------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(map));
+        Log.println(PRIORITY, "------->", "Thread: " + threadName + "／" + lineIndicator + " " + String.valueOf(map));
     }
 
     public static <K, V> void print(String tag, Map<K, V> map) {
