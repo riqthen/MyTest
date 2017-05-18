@@ -22,6 +22,8 @@ import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 
+import static android.Manifest.permission.READ_PHONE_STATE;
+
 
 /**
  * MPermissions
@@ -33,25 +35,11 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        MPermissions.requestPermissions(this, 0x1, READ_PHONE_STATE);
     }
 
     public void requestStorage(View view) {
-        MPermissions.requestPermissions(this, 0x1, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        RequestQueue queue3 = Volley.newRequestQueue(this);
-        Request request3 = new ImageRequest("http://img06.tooopen.com/images/20161112/tooopen_sy_185726882764.jpg", new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                FileUtils.saveToStorage("/storage/emulated/0/", "fffs.png", response);
-            }
-        }, 800, 800, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Lcat.print("请求失败");
-            }
-        });
-        queue3.add(request3);
-
+        MPermissions.requestPermissions(this, 0x2, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -71,6 +59,32 @@ public class Main3Activity extends AppCompatActivity {
     public void requestStorageFailed() {
         ToastUtils.showToast(this, "请求内存失败");
         Lcat.print("请求内存失败");
+    }
+
+    @PermissionGrant(0x2)
+    public void requestpSuccess() {
+        ToastUtils.showToast(this, "请求电话成功");
+        Lcat.print("请求电话成功");
+        RequestQueue queue3 = Volley.newRequestQueue(this);
+        Request request3 = new ImageRequest("http://img06.tooopen.com/images/20161112/tooopen_sy_185726882764.jpg", new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                FileUtils.saveToStorage("/storage/emulated/0/", "ff99977fs.png", response);
+            }
+        }, 800, 800, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Lcat.print("请求失败");
+            }
+        });
+        queue3.add(request3);
+
+    }
+
+    @PermissionDenied(0x2)
+    public void requestpFailed() {
+        ToastUtils.showToast(this, "请求电话失败");
+        Lcat.print("请求电话失败");
     }
 
 
