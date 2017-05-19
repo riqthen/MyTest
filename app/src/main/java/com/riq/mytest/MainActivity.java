@@ -7,11 +7,11 @@ import android.widget.EditText;
 
 import com.riq.mylibrary.utils.Lcat;
 
-import java.io.UnsupportedEncodingException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.riq.mylibrary.utils.DateUtils.formatTimestamp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,19 +31,13 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn)
     public void onViewClicked() {
         String s = et.getText().toString().trim();
-        try {
-            byte[] b_gbk = s.getBytes("GBK");
-            byte[] b_utf8 = s.getBytes("UTF-8");
-            byte[] b_iso88591 = s.getBytes("ISO8859-1");
-            Lcat.print(b_gbk);
-            Lcat.print(b_utf8);
-            Lcat.print(b_iso88591);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
+        Lcat.print(formatTimestamp(s));
+        Lcat.print(formatTimestamp(System.currentTimeMillis() + ""));
+        Lcat.print(formatTimestamp("2015年5月2日 22:55:22.0"));
 
 
     }
+
+
 
 }

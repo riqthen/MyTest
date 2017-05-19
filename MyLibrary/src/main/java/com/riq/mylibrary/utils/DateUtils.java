@@ -11,19 +11,30 @@ public class DateUtils {
     /**
      * TODO 时间戳转日期字符串
      *
-     * @param timestamp 时间戳（毫秒）
-     * @param pattern   Format格式,如：yyyy-MM-dd/yyyymmdd/yyyy-MM-dd HH:mm:ss...
-     * @return 时间字符串 格式： yyyy-MM-dd/yyyyMMdd...
+     * @param timeOrTimestamps 时间戳
+     * @return 1970-01-01 08:00:00
+     * 区分是时间戳格式还是时间格式1970-01-01 08:00:00.0
      */
-    public static String formatTimestamp(long timestamp, String pattern) {
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        return format.format(new Date(timestamp));
+    public static String formatTimestamp(String timeOrTimestamps) {
+        if (StringUtils.isNaturalNumber(timeOrTimestamps)) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return format.format(new Date(Long.parseLong(timeOrTimestamps)));
+        } else if (timeOrTimestamps.contains(".")) {
+            return timeOrTimestamps.substring(0, timeOrTimestamps.lastIndexOf("."));
+        }
+        return null;
     }
 
+    /**
+     * @param timestamp 时间戳（毫秒）
+     * @param pattern   格式：yyyy-MM-dd/yyyymmdd/yyyy-MM-dd HH:mm:ss...
+     * @return 时间字符串 格式： yyyy-MM-dd/yyyyMMdd...
+     */
     public static String formatTimestamp(String timestamp, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(new Date(Long.parseLong(timestamp)));
     }
+
 
 
     /**

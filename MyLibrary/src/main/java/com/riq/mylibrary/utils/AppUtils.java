@@ -42,18 +42,18 @@ public class AppUtils {
 
     /**
      * TODO 获取屏幕宽度
-     * 1920
+     * 竖屏 1806   横屏 1080
      **/
-    public static int getWidth(Context context) {
+    public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getWidth();
     }
 
     /**
      * TODO 获取屏幕高度
-     * 1080
+     * 竖屏 1080   横屏 1806（不包含虚拟按键的高度）
      **/
-    public static int getHeight(Context context) {
+    public static int getScreenHeight(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getHeight();
     }
