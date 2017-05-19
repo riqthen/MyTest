@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.riq.mylibrary.utils.Utils.ContactUtil.getContact;
-import static com.riq.mylibrary.utils.Utils.ContactUtil.setContact;
+import static com.riq.mylibrary.utils.Utils.ContactUtil.setContactToView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Utils.SoundPlayUtils.getInstance().init(this, new int[]{R.raw.beep, R.raw.read_id_success, R.raw.app_launcher});
+        Utils.SoundPlayUtils.getInstance().playSound(this, R.raw.app_launcher);
+
     }
 
     @OnClick(R.id.btn)
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0x111:
-                Utils.ContactUtil.setContactToView(this, data, btn, et);
+                setContactToView(this, data, btn, et);
                 break;
         }
     }

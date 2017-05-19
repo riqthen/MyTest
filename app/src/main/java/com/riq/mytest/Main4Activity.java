@@ -17,8 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.riq.mylibrary.utils.ContactUtil.getContact;
-import static com.riq.mylibrary.utils.ContactUtil.setContact;
+import static com.riq.mylibrary.utils.Utils.ContactUtil.getContact;
+import static com.riq.mylibrary.utils.Utils.ContactUtil.setContactToView;
+
 
 public class Main4Activity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class Main4Activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 0x100:
-                setContact(this, data, etName);
+                setContactToView(this, data, etName);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

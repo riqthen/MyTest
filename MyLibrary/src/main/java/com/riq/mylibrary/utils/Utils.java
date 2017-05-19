@@ -1,25 +1,16 @@
 package com.riq.mylibrary.utils;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +26,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static android.content.Context.AUDIO_SERVICE;
 import static com.riq.mylibrary.utils.Utils.StringUtils.isNaturalNumber;
 
 /**
@@ -606,80 +596,9 @@ public class Utils {
         }
     }
 
-
-    /*
-     * TODO 播放音频工具
-     * 使用方法：
-     * 1. 加载音频池 SoundPlayUtils.getInstance().init(this,int[] raws);
-     * 2. 播放某音频 SoundPlayUtils.getInstance().playSound(this, rawId)
-     */
-
-    public static class SoundPlayUtils {
-        // TODO: 将所有音频放入raws数组中
-        private static SoundPool soundPool;
-        private static boolean soundPoolLoaded;
-        private static SparseIntArray soundIds;
-
-        public static SoundPlayUtils getInstance() {
-            return new SoundPlayUtils();
-        }
-
-        public void init(final Context context, final int[] raws) {
-            soundIds = new SparseIntArray();
-            //音频池没有加载的话,则加载线程池
-            if (!soundPoolLoaded) {
-                soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0); // 同时播放的流的最大数量／流的类型，一般为STREAM_MUSIC／采样率转化质量，当前无效果，使用0作为默认值
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int raw : raws) {
-                            //加载音频资源  priority参数目前没有效果，建议设置为1
-                            int soundId = soundPool.load(context, raw, 1);  //记载成功将返回一个非0的soundID ，用于播放时指定特定的音频。
-                            soundIds.put(raw, soundId);
-                        }
-                        soundPoolLoaded = true;
-                    }
-                }).start();
-            }
-        }
-
-        /**
-         * 播放音频
-         *
-         * @param context this
-         * @param rawId   R.raw.
-         */
-        public void playSound(Context context, int rawId) {
-            if (soundPoolLoaded) {
-                AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
-                float volume = (float) am.getStreamVolume(AudioManager.STREAM_MUSIC)
-                        / am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                Lcat.print(soundIds.get(rawId));
-                soundPool.play(soundIds.get(rawId), volume, volume, 1, 0, 1);   //soundId,通过load方法获取／左声道音量比／右声道音量比／优先级,0为最小／
-            }
-        }
-
-        /**
-         * 播放音频
-         *
-         * @param context  this
-         * @param rawId    R.raw.
-         * @param priority 流的优先级，值越大优先级高，影响当同时播放数量超出了最大支持数时SoundPool对该流的处理；
-         * @param loop     循环次数,负数表示无限循环,0表示播放1次,1表示播放2次,即循环1次
-         * @param rate     播放速率[0.5, 2]
-         */
-        public void playSound(Context context, int rawId, int priority, int loop, float rate) {
-            if (soundPoolLoaded) {
-                AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
-                float volume = (float) am.getStreamVolume(AudioManager.STREAM_MUSIC)
-                        / am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                Lcat.print(soundIds.get(rawId));
-                soundPool.play(soundIds.get(rawId), volume, volume, priority, loop, rate);   //soundId,通过load方法获取／左声道音量比／右声道音量比／优先级,0为最小／
-            }
-        }
-    }
     /**
-     * TODO 点击按钮之后，跳转到联系人界面，并将联系人姓名和电话携带回来设置到TextView（姓名,电话 or 电话）
+     * TODO 获取并设置联系人手机号
+     * 点击按钮之后，跳转到联系人界面，并将联系人姓名和电话携带回来设置到TextView（姓名,电话 or 电话）
      * 使用方法:
      * 1.点击事件 getContact(this, 0x100);
      * 2.重写方法onActivityResult,使用setContact()
@@ -692,73 +611,6 @@ public class Utils {
      * super.onActivityResult(requestCode, resultCode, data); }
      */
 
-    public static class ContactUtil {
-        /**
-         * 将姓名和电话设置到TextView
-         * 一个TextView则设置电话，两个则分别设置姓名和电话
-         *
-         * @param context  this
-         * @param data     data
-         * @param tPhone   btn，tv等
-         * @param <TPhone> Button TextView等
-         */
-        public static <TPhone extends TextView> void setContactToView(Context context, Intent data, TPhone tPhone) {
-            if (data == null) {
-                return;
-            }
-            Uri uri = data.getData();
-            String[] contacts = getPhoneContacts(context, uri);
-            assert contacts != null;
-            String phone = contacts[1];
-            //只有一个TextView,则在上面显示电话
-            tPhone.setText(phone);   //手机号
-        }
 
-        public static <TName extends TextView, TPhone extends TextView> void setContactToView(Context context, Intent data, TName tViewName, TPhone tViewPhone) {
-            if (data == null) {
-                return;
-            }
-            Uri uri = data.getData();
-            String[] contacts = getPhoneContacts(context, uri);
-            assert contacts != null;
-            String name = contacts[0];
-            String phone = contacts[1];
-            //只有一个TextView,则在上面显示电话,两个TextView就显示姓名和手机号
-            tViewName.setText(name);    //姓名
-            tViewPhone.setText(phone);   //手机号
-        }
-
-        private static String[] getPhoneContacts(Context context, Uri uri) {
-            String[] contact = new String[2];
-            //得到ContentResolver对象
-            ContentResolver cr = context.getContentResolver();
-            //取得电话本中开始一项的光标
-            Cursor cursor = cr.query(uri, null, null, null, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                //取得联系人姓名
-                int nameFieldColumnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                contact[0] = cursor.getString(nameFieldColumnIndex);
-                //取得电话号码
-                String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-                if (phone != null) {
-                    phone.moveToFirst();
-                    contact[1] = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                }
-                if (phone != null) {
-                    phone.close();
-                }
-                cursor.close();
-            } else {
-                return null;
-            }
-            return contact;
-        }
-
-        public static void getContact(Activity activity, int requestCode) {
-            activity.startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), requestCode);
-        }
-    }
 
 }
