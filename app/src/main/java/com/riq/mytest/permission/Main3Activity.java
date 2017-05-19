@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
-import com.riq.mylibrary.utils.FileUtils;
 import com.riq.mylibrary.utils.Lcat;
 import com.riq.mylibrary.utils.ToastUtils;
 import com.riq.mytest.R;
@@ -23,6 +22,7 @@ import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
+import static com.riq.mylibrary.utils.Utils.saveBitmapToStorage;
 
 
 /**
@@ -76,7 +76,7 @@ public class Main3Activity extends AppCompatActivity {
         Request request3 = new ImageRequest("http://img06.tooopen.com/images/20161112/tooopen_sy_185726882764.jpg", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                FileUtils.saveBitmapToStorage("/storage/emulated/0/", "ff99977fs.png", response);
+                saveBitmapToStorage("/storage/emulated/0/", "ff99977fs.png", response);
             }
         }, 800, 800, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
             @Override

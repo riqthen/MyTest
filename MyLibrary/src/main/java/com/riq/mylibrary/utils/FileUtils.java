@@ -3,24 +3,18 @@ package com.riq.mylibrary.utils;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-/**
- * @author Created by riqthen on 2016/11/8.
- */
 public class FileUtils {
     /**
      * 创建指定的文件路径
@@ -135,26 +129,6 @@ public class FileUtils {
 
 //===============================
 
-    /**
-     * TODO　保存图片到手机
-     * @param path     保存在手机的路径 /storage/emulated/0/
-     * @param fileName 文件名（需要扩展名,png,jpg...）
-     * @param bmp bitmap
-     */
-    public static void saveBitmapToStorage(String path, String fileName, Bitmap bmp) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(new File(path, fileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        try {
-            assert fos != null;
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }
