@@ -7,14 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.riq.mylibrary.utils.Utils;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.riq.mylibrary.utils.Utils.ContactUtil.getContact;
-import static com.riq.mylibrary.utils.Utils.ContactUtil.setContactToView;
+import static com.riq.mylibrary.utils.ContactHelper.getContact;
+import static com.riq.mylibrary.utils.ContactHelper.setContactToView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Utils.SoundPlayUtils.getInstance().init(this, new int[]{R.raw.beep, R.raw.read_id_success, R.raw.app_launcher});
-        Utils.SoundPlayUtils.getInstance().playSound(this, R.raw.app_launcher);
+
 
     }
 

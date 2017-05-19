@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/preview_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.uuzuche.lib_zxing.view.ViewfinderView
+            android:id="@+id/viewfinder_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:inner_corner_color="@color/bg_color"
+            app:inner_corner_length="30dp"
+            app:inner_corner_width="5dp"
+            app:inner_height="200dp"
+            app:inner_margintop="150dp"
+            app:inner_scan_bitmap="@mipmap/eye_open"
+            app:inner_scan_iscircle="false"
+            app:inner_scan_speed="10"
+            app:inner_width="200dp" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="返回" />
+</RelativeLayout>

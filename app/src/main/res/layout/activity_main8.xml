@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.riq.mytest.zxingLibrary.Main6Activity">
+    tools:context="com.riq.mytest.zxing.Main8Activity">
 
     <EditText
         android:id="@+id/et"
@@ -21,16 +21,13 @@
         android:text="TextView" />
 
     <Button
-        android:id="@+id/btn_scan"
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="扫描二维码" />
+        android:text="Button" />
 
-    <Button
-        android:id="@+id/btn_img"
+    <ImageView
+        android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="扫描本地二维码" />
-
-
+        android:layout_height="match_parent" />
 </LinearLayout>

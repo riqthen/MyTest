@@ -1,19 +1,11 @@
 package com.riq.mytest.permission;
 
 import android.Manifest;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
 import com.riq.mylibrary.utils.Lcat;
 import com.riq.mylibrary.utils.ToastUtils;
 import com.riq.mytest.R;
@@ -22,7 +14,6 @@ import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
-import static com.riq.mylibrary.utils.Utils.saveBitmapToStorage;
 
 
 /**
@@ -72,19 +63,7 @@ public class Main3Activity extends AppCompatActivity {
     public void requestpSuccess() {
         ToastUtils.showToast(this, "请求电话成功");
         Lcat.print("请求电话成功");
-        RequestQueue queue3 = Volley.newRequestQueue(this);
-        Request request3 = new ImageRequest("http://img06.tooopen.com/images/20161112/tooopen_sy_185726882764.jpg", new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                saveBitmapToStorage("/storage/emulated/0/", "ff99977fs.png", response);
-            }
-        }, 800, 800, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Lcat.print("请求失败");
-            }
-        });
-        queue3.add(request3);
+
 
     }
 

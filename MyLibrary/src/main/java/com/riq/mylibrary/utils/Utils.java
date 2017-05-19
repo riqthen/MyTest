@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
@@ -12,10 +13,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -26,6 +31,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.riq.mylibrary.utils.Utils.StringUtils.isNaturalNumber;
 
 /**
@@ -262,33 +268,157 @@ public class Utils {
         return list;
     }
 
-    /**
-     * TODO　保存图片到手机
-     *
-     * @param path     保存在手机的路径 /storage/emulated/0/
-     * @param fileName 文件名（需要扩展名,png,jpg...）
-     * @param bmp      bitmap
+    /*
+     * 文件工具
+     * 读取Storage和网络图片用Glide
+     * 1.保存图片到storage
+     * 2.从storage读取图片
+     * 3.保存文本到file中
+     * 4.从file中读取文本
+     * 5.保存图片到file中
+     * 6.读取file中的图片
      */
-    public static void saveBitmapToStorage(String path, String fileName, Bitmap bmp) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(new File(path, fileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public static class FileUtils {
+        /**
+         * TODO：保存图片到手机
+         *
+         * @param path     保存在手机的路径 /storage/emulated/0/
+         * @param filename 文件名（需要扩展名,png,jpg...）
+         * @param bmp      bitmap
+         */
+        public static void saveImageToStorage(String path, String filename, Bitmap bmp) {
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(new File(path, filename));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            try {
+                assert fos != null;
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        try {
-            assert fos != null;
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        /**
+         * TODO：从手机读取图片
+         * 使用Glide
+         *
+         * @param path     文件路径
+         * @param filename 文件名，需要扩展名
+         * @return 图片
+         */
+        public static Bitmap getImageFromStorage(String path, String filename) {
+            File file = new File(path);
+            if (file.exists()) {
+                return BitmapFactory.decodeFile(path + filename);
+            } else {
+                return null;
+            }
+        }
+
+        /**
+         * TODO：保存文本到data/data/包/file中
+         *
+         * @param context  this
+         * @param filename 文件名
+         * @param text     保存到txt中的文本
+         */
+        public static void saveTextToFile(Context context, String filename, String text) {
+            FileOutputStream out;
+            BufferedWriter writer = null;
+            OutputStreamWriter osw;
+            try {
+                out = context.openFileOutput(filename, MODE_PRIVATE);
+                osw = new OutputStreamWriter(out);
+                writer = new BufferedWriter(osw);
+                writer.write(text);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        /**
+         * TODO：读取data/data/包/file中的文本
+         *
+         * @param context  this
+         * @param filename 文件名，需要扩展名
+         * @return 读取的文本
+         */
+        public static String getTextFromFile(Context context, String filename) {
+            FileInputStream in = null;//只需传文件名
+            try {
+                in = context.openFileInput(filename);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();//输出到内存
+            int len = 0;
+            byte[] buf = new byte[1024];
+            try {
+                assert in != null;
+                while ((len = in.read(buf)) != -1) {
+                    outStream.write(buf, 0, len);//
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            byte[] content_byte = outStream.toByteArray();
+            return new String(content_byte);
+        }
+
+        /**
+         * TODO：保存图片到data/data/包/file中
+         *
+         * @param context  this
+         * @param filename 文件名，需要扩展名
+         * @param bitmap   图片bitmap
+         */
+        public static void saveImageToFile(Context context, String filename, Bitmap bitmap) {
+            try {
+                FileOutputStream fos = context.openFileOutput(filename, MODE_PRIVATE);
+                //bitmap转文件对象
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * TODO：读取data/data/包/file中的图片
+         *
+         * @param context  this
+         * @param filename 图片文件名 需要扩展名
+         * @return bitmap
+         */
+        public static Bitmap getImageFromFile(Context context, String filename) {
+            Bitmap bitmap = null;
+            try {
+                FileInputStream fis = context.openFileInput(filename);
+                bitmap = BitmapFactory.decodeStream(fis);
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
         }
     }
 
-
     /*
-     * TODO 检查是否有网络
-     */
+       * TODO 检查是否有网络
+       */
     public static class NetUtil {
         public static boolean checkNetworkAvailable(Context context) {
             ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -595,22 +725,4 @@ public class Utils {
             }
         }
     }
-
-    /**
-     * TODO 获取并设置联系人手机号
-     * 点击按钮之后，跳转到联系人界面，并将联系人姓名和电话携带回来设置到TextView（姓名,电话 or 电话）
-     * 使用方法:
-     * 1.点击事件 getContact(this, 0x100);
-     * 2.重写方法onActivityResult,使用setContact()
-     *
-     * @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-     * switch (requestCode) {
-     * case 0x100:  (对应getContact(this, 0x100))
-     * setContactToView(this, data, etName, etPhone...);
-     * break; }
-     * super.onActivityResult(requestCode, resultCode, data); }
-     */
-
-
-
 }

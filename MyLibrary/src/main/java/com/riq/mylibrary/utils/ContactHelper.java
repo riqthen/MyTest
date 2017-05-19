@@ -9,6 +9,20 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.widget.TextView;
 
+/**
+ * TODO 获取并设置联系人手机号
+ * 点击按钮之后，跳转到联系人界面，并将联系人姓名和电话携带回来设置到TextView（姓名,电话 or 电话）
+ * 使用方法:
+ * 1.点击事件 getContact(this, 0x100);
+ * 2.重写方法onActivityResult,使用setContact()
+ *
+ * @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+ * switch (requestCode) {
+ * case 0x100:  (对应getContact(this, 0x100))
+ * setContactToView(this, data, etName, etPhone...);
+ * break; }
+ * super.onActivityResult(requestCode, resultCode, data); }
+ */
 public class ContactHelper {
     /**
      * 将姓名和电话设置到TextView
