@@ -21,12 +21,10 @@ public class Main5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main5);
         ButterKnife.bind(this);
         mediaPlayer = MediaPlayer.create(this, R.raw.app_launcher);
-//        Utils.SoundPlayHelper.getInstance().init(this, new int[]{R.raw.beep, R.raw.read_id_success, R.raw.app_launcher});
     }
 
     @OnClick(R.id.btn)
     public void onViewClicked() {
-//        Utils.SoundPlayHelper.getInstance().playSound(this, R.raw.read_id_success, 1, -1, 1);
         try {
             mediaPlayer.start();
             mediaPlayer.setLooping(true);
@@ -39,10 +37,10 @@ public class Main5Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if (mediaPlayer.isPlaying() && mediaPlayer != null) {
-//            mediaPlayer.stop();
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
+        if (mediaPlayer.isPlaying() && mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
