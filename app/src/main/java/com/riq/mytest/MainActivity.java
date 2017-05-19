@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.riq.mylibrary.utils.DateUtils.formatTimestamp;
+import static com.riq.mylibrary.utils.Utils.compareDate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,13 +31,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn)
     public void onViewClicked() {
         String s = et.getText().toString().trim();
-        Lcat.print(formatTimestamp(s));
-        Lcat.print(formatTimestamp(System.currentTimeMillis() + ""));
-        Lcat.print(formatTimestamp("2015年5月2日 22:55:22.0"));
+        Lcat.print(compareDate("2017-05-19 04:55:20", s, "yyyy-dd"));
+        Lcat.print(compareDate(System.currentTimeMillis() + "", s));
 
 
     }
-
 
 
 }
