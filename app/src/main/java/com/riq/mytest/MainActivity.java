@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.riq.mylibrary.utils.Lcat;
+import com.riq.mylibrary.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         String s = et.getText().toString().trim();
         Lcat.print(compareDate("2017-05-19 04:55:20", s, "yyyy-dd"));
         Lcat.print(compareDate(System.currentTimeMillis() + "", s));
-
-
+        Utils.NetUtil.checkNetworkAvailable(this);
     }
 
 

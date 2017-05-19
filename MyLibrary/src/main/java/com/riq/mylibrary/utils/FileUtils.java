@@ -141,7 +141,7 @@ public class FileUtils {
      * @param fileName 文件名（需要扩展名,png,jpg...）
      * @param bmp bitmap
      */
-    public static void saveToStorage(String path, String fileName, Bitmap bmp) {
+    public static void saveBitmapToStorage(String path, String fileName, Bitmap bmp) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(path, fileName));

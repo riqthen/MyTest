@@ -76,7 +76,7 @@ public class Main3Activity extends AppCompatActivity {
         Request request3 = new ImageRequest("http://img06.tooopen.com/images/20161112/tooopen_sy_185726882764.jpg", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                FileUtils.saveToStorage("/storage/emulated/0/", "ff99977fs.png", response);
+                FileUtils.saveBitmapToStorage("/storage/emulated/0/", "ff99977fs.png", response);
             }
         }, 800, 800, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
             @Override

@@ -1,8 +1,12 @@
 package com.riq.mylibrary.utils;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
+import android.util.SparseIntArray;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,8 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.Context.AUDIO_SERVICE;
 
 /**
  * Created by riq on 2017/5/19.
@@ -256,28 +263,309 @@ public class Utils {
     /**
      * TODO 检查是否有网络
      *
-     * @param context this
      * @return true有网, false没有网
      */
-    public static boolean checkNetworkAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity == null) {
-            return false;
-        } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (NetworkInfo anInfo : info) {
-                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        if (anInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                            return true;
-                        } else if (anInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                            return true;
+    public static class NetUtil {
+        public static boolean checkNetworkAvailable(Context context) {
+            ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity == null) {
+                return false;
+            } else {
+                NetworkInfo[] info = connectivity.getAllNetworkInfo();
+                if (info != null) {
+                    for (NetworkInfo anInfo : info) {
+                        if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+                            if (anInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                                return true;
+                            } else if (anInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                                return true;
+                            }
                         }
                     }
                 }
             }
+            return false;
         }
-        return false;
     }
 
+    /**
+     * Created by riq on 2017/5/10.
+     * TODO 随机数工具类
+     */
+
+    public static class RandomUtils {
+
+        private static final String NUMBERS_AND_LETTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static final String NUMBERS = "0123456789";
+        private static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static final String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+
+        private RandomUtils() {
+            throw new AssertionError();
+        }
+
+        /**
+         * TODO: 随机获取length长度个字符
+         * 数字,大写字母,小写字母
+         *
+         * @param length length
+         * @return RandomUtils
+         */
+        public static String getRandomNumbersAndLetters(int length) {
+            return getRandom(NUMBERS_AND_LETTERS, length);
+        }
+
+        /**
+         * TODO: 随机获取length长度个 数字
+         *
+         * @param length 字符长度
+         * @return RandomUtils
+         */
+        public static String getRandomNumbers(int length) {
+            return getRandom(NUMBERS, length);
+        }
+
+        /**
+         * TODO: 随机获取length长度个 字母（无论大小写）
+         *
+         * @param length length
+         * @return RandomUtils
+         */
+        public static String getRandomLetters(int length) {
+            return getRandom(LETTERS, length);
+        }
+
+        /**
+         * TODO: 随机获取length长度个 大写字母
+         *
+         * @param length length
+         * @return ADSFY
+         */
+        public static String getRandomUpperCaseLetters(int length) {
+            return getRandom(UPPER_CASE_LETTERS, length);
+        }
+
+        /**
+         * TODO: 随机获取length长度个 小写字母
+         *
+         * @param length length
+         * @return fdsfs
+         */
+        public static String getRandomLowerCaseLetters(int length) {
+            return getRandom(LOWER_CASE_LETTERS, length);
+        }
+
+        /**
+         * TODO: 获取随机自然数
+         *
+         * @param max 接收的数值
+         * @return 返回一个随机的数字[0, max)
+         */
+        public static int getRandom(int max) {
+            return getRandom(0, max);
+        }
+
+        /**
+         * TODO: 在[min, max)范围内获取随机整数
+         *
+         * @param min 最小
+         * @param max 最大
+         * @return 返回一个范围的数值[min, max)
+         */
+        public static int getRandom(int min, int max) {
+            if (min > max) {
+                return 0;
+            }
+            if (min == max) {
+                return min;
+            }
+            return min + new Random().nextInt(max - min);
+        }
+
+        /**
+         * get a fixed-length random string, its a mixture of chars in source
+         *
+         * @param source source
+         * @param length length
+         * @return get a fixed-length random string, its a mixture of chars in source
+         */
+        public static String getRandom(String source, int length) {
+            return TextUtils.isEmpty(source) ? null : getRandom(source.toCharArray(), length);
+        }
+
+        /**
+         * sourceChar个字符,随机排列为一个长度为length的字符串
+         *
+         * @param sourceChar new char[]{'3','f','d'}
+         * @param length     4
+         * @return f3d3
+         */
+        public static String getRandom(char[] sourceChar, int length) {
+            if (sourceChar == null || sourceChar.length == 0 || length < 0) {
+                return null;
+            }
+            StringBuilder str = new StringBuilder(length);
+            Random random = new Random();
+            for (int i = 0; i < length; i++) {
+                str.append(sourceChar[random.nextInt(sourceChar.length)]);
+            }
+            return str.toString();
+        }
+
+
+        /**
+         * Shuffling algorithm, Randomly permutes the specified array using a default source of randomness
+         *
+         * @param objArray 数组
+         * @return 从新的数组
+         */
+        public static boolean shuffle(Object[] objArray) {
+            if (objArray == null) {
+                return false;
+            }
+            return shuffle(objArray, getRandom(objArray.length));
+        }
+
+        /**
+         * Shuffling algorithm, Randomly permutes the specified array
+         *
+         * @param objArray     数组
+         * @param shuffleCount 洗的个数
+         * @return 是否成功
+         */
+        public static boolean shuffle(Object[] objArray, int shuffleCount) {
+            int length;
+            if (objArray == null || shuffleCount < 0 || (length = objArray.length) < shuffleCount) {
+                return false;
+            }
+
+            for (int i = 1; i <= shuffleCount; i++) {
+                int random = getRandom(length - i);
+                Object temp = objArray[length - i];
+                objArray[length - i] = objArray[random];
+                objArray[random] = temp;
+            }
+            return true;
+        }
+
+        /**
+         * 将数组元素随机排列,个数为[o,intArray.length)
+         *
+         * @param intArray 数组
+         * @return 洗牌之后
+         */
+        public static int[] shuffle(int[] intArray, boolean includeChildArray) {
+            if (intArray == null) {
+                return null;
+            }
+            if (includeChildArray) {
+                return shuffle(intArray, getRandom(intArray.length));
+            } else {
+                return shuffle(intArray, intArray.length);
+            }
+        }
+
+
+        /**
+         * Shuffling algorithm, Randomly permutes the specified int array
+         *
+         * @param intArray     数组
+         * @param shuffleCount 范围
+         * @return 新的数组
+         */
+        public static int[] shuffle(int[] intArray, int shuffleCount) {
+            int length;
+            if (intArray == null || shuffleCount < 0) {
+                return new int[]{};
+            }
+            if ((length = intArray.length) < shuffleCount) {
+                shuffleCount = length;
+            }
+            int[] out = new int[shuffleCount];
+
+            for (int i = 1; i <= shuffleCount; i++) {
+                int random = getRandom(length - i);
+                out[i - 1] = intArray[random];
+                int temp = intArray[length - i];
+                intArray[length - i] = intArray[random];
+                intArray[random] = temp;
+            }
+            return out;
+        }
+    }
+
+
+    /**
+     * TODO 播放音频工具
+     * 使用方法：
+     * 1. 加载音频池 SoundPlayUtils.getInstance().init(this,int[] raws);
+     * 2. 播放某音频 SoundPlayUtils.getInstance().playSound(this, rawId)
+     */
+
+    public static class SoundPlayUtils {
+        // TODO: 将所有音频放入raws数组中
+        private static SoundPool soundPool;
+        private static boolean soundPoolLoaded;
+        private static SparseIntArray soundIds;
+
+        public static SoundPlayUtils getInstance() {
+            return new SoundPlayUtils();
+        }
+
+        public void init(final Context context, final int[] raws) {
+            soundIds = new SparseIntArray();
+            //音频池没有加载的话,则加载线程池
+            if (!soundPoolLoaded) {
+                soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0); // 同时播放的流的最大数量／流的类型，一般为STREAM_MUSIC／采样率转化质量，当前无效果，使用0作为默认值
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int raw : raws) {
+                            //加载音频资源  priority参数目前没有效果，建议设置为1
+                            int soundId = soundPool.load(context, raw, 1);  //记载成功将返回一个非0的soundID ，用于播放时指定特定的音频。
+                            soundIds.put(raw, soundId);
+                        }
+                        soundPoolLoaded = true;
+                    }
+                }).start();
+            }
+        }
+
+        /**
+         * 播放音频
+         *
+         * @param context this
+         * @param rawId   R.raw.
+         */
+        public void playSound(Context context, int rawId) {
+            if (soundPoolLoaded) {
+                AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
+                float volume = (float) am.getStreamVolume(AudioManager.STREAM_MUSIC)
+                        / am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                Lcat.print(soundIds.get(rawId));
+                soundPool.play(soundIds.get(rawId), volume, volume, 1, 0, 1);   //soundId,通过load方法获取／左声道音量比／右声道音量比／优先级,0为最小／
+            }
+        }
+
+        /**
+         * 播放音频
+         *
+         * @param context  this
+         * @param rawId    R.raw.
+         * @param priority 流的优先级，值越大优先级高，影响当同时播放数量超出了最大支持数时SoundPool对该流的处理；
+         * @param loop     循环次数,负数表示无限循环,0表示播放1次,1表示播放2次,即循环1次
+         * @param rate     播放速率[0.5, 2]
+         */
+        public void playSound(Context context, int rawId, int priority, int loop, float rate) {
+            if (soundPoolLoaded) {
+                AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
+                float volume = (float) am.getStreamVolume(AudioManager.STREAM_MUSIC)
+                        / am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                Lcat.print(soundIds.get(rawId));
+                soundPool.play(soundIds.get(rawId), volume, volume, priority, loop, rate);   //soundId,通过load方法获取／左声道音量比／右声道音量比／优先级,0为最小／
+            }
+        }
+
+    }
 }
