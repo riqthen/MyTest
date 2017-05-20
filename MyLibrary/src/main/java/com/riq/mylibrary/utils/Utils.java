@@ -280,7 +280,7 @@ public class Utils {
      */
     public static class FileUtils {
         /**
-         * TODO：保存图片到手机
+         * TODO：保存图片到Storage
          *
          * @param path     保存在手机的路径 /storage/emulated/0/
          * @param filename 文件名（需要扩展名,png,jpg...）
@@ -724,5 +724,23 @@ public class Utils {
                 ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
             }
         }
+
+        /**
+         * TODO：dp转px(像素)
+         */
+        public static int dp2px(Context context, float dp) {
+            final float scale = context.getResources().getDisplayMetrics().density;
+            return (int) (dp * scale + 0.5f);
+        }
+
+        /**
+         * TODO：px(像素)转dp
+         */
+        public static int px2dp(Context context, float px) {
+            final float scale = context.getResources().getDisplayMetrics().density;
+            return (int) (px / scale + 0.5f);
+        }
+
+
     }
 }

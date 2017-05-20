@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!--android:clipChildren="false"使中间图标可以在布局外-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:orientation="vertical"
+    tools:context="com.riq.mytest.bottomtab.BottomTabBaseActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#c7c7c7" />
+
+    <com.riq.mytest.bottomtab.BottomTabView
+        android:id="@+id/btv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="bottom" />
+</LinearLayout>
