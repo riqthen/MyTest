@@ -1,6 +1,7 @@
 package com.riq.test;
 
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.riq.basebottomtablib.BaseBottomTabActivity;
 import com.riq.basebottomtablib.BottomTabView;
@@ -24,5 +25,10 @@ public class MainActivity extends BaseBottomTabActivity {
         fragments.add(new FragmentTab1());
         fragments.add(new FragmentTab2());
         return fragments;
+    }
+
+    @Override
+    public View setCenterView(int iconRes, int iconWidth, int iconHeight, int leftMargin, int rightMargin, boolean isOutTab) {
+        return super.setCenterView(R.mipmap.ic_launcher_round, 300, 300, 10, 10, true);
     }
 }
