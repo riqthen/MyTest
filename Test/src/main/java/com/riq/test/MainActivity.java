@@ -1,21 +1,19 @@
-package com.riq.mytest;
+package com.riq.test;
 
 import android.support.v4.app.Fragment;
 
 import com.riq.basebottomtablib.BaseBottomTabActivity;
 import com.riq.basebottomtablib.BottomTabView;
-import com.riq.mytest.bottomtab.FragmentTab1;
-import com.riq.mytest.bottomtab.FragmentTab2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main11Activity extends BaseBottomTabActivity {
+public class MainActivity extends BaseBottomTabActivity {
 
     @Override
     protected List<BottomTabView.TabItemView> getTabViews() {
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
-        tabItemViews.add(new BottomTabView.TabItemView(this, "", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
+        tabItemViews.add(new BottomTabView.TabItemView(this, " ", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
         tabItemViews.add(new BottomTabView.TabItemView(this, "", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
         return tabItemViews;
     }

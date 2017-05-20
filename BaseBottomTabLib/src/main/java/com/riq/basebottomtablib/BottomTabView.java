@@ -48,7 +48,7 @@ public class BottomTabView extends LinearLayout {
      *
      * @param viewPager
      */
-    public void setUpWithViewPager(final ViewPager viewPager) {
+    public void setupWithViewPager(final ViewPager viewPager) {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -202,17 +202,18 @@ public class BottomTabView extends LinearLayout {
         public TextView tvTitle;        //文字
         public ImageView ivIcon;        //图标
 
+
         public TabItemView(Context context) {
             super(context);
         }
 
         /**
-         * @param title          标题
-         * @param leftPadding    图标padding
-         * @param textColorDefault   标题默认颜色
-         * @param textColorPress     标题被选中时的颜色
-         * @param iconResDefault 默认图标
-         * @param iconResPress   被选中时的图标
+         * @param title            标题
+         * @param leftPadding      图标padding
+         * @param textColorDefault 标题默认颜色
+         * @param textColorPress   标题被选中时的颜色
+         * @param iconResDefault   默认图标
+         * @param iconResPress     被选中时的图标
          */
         public TabItemView(Context context, String title, int leftPadding, int topPadding, int rightPadding
                 , int bottomPadding, int textColorDefault, int textColorPress, int iconResDefault, int iconResPress) {
@@ -224,15 +225,24 @@ public class BottomTabView extends LinearLayout {
             this.iconResDefault = iconResDefault;
             this.iconResPress = iconResPress;
             View view = LayoutInflater.from(super.getContext()).inflate(R.layout.view_tab_item, this);
+            // TODO: 2017/5/20 去掉点击的背景效果
+            LinearLayout viewTabView = (LinearLayout) findViewById(R.id.viewTabView);
+            viewTabView.setBackgroundResource(R.color.transparent);
+
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-            // TODO: 2017/5/20 只显示图标不显示文本 
-//            tvTitle.setVisibility(GONE);
+
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
             view.setLayoutParams(layoutParams);
-            tvTitle.setText(title);
+            // TODO: 2017/5/20 如果设置标题为空，则只显示图标
+            if (title.trim().equals("")) {
+                tvTitle.setVisibility(GONE);
+            } else {
+                tvTitle.setText(title);
+            }
             view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+
         }
 
         /**
