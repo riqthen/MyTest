@@ -1,10 +1,12 @@
 package com.riq.test;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.riq.basebottomtablib.BaseBottomTabActivity;
 import com.riq.basebottomtablib.BottomTabView;
+import com.riq.mylibrary.utils.Lcat;
 import com.riq.mylibrary.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -15,8 +17,15 @@ public class MainActivity extends BaseBottomTabActivity {
     @Override
     protected List<BottomTabView.TabItemView> getTabViews() {
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
-        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10, 0, 0, 0, 0));
-        tabItemViews.add(new BottomTabView.TabItemView(this, "h2", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10
+                , Color.rgb(255, 255, 255), Color.RED, 0, 0));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "h2", 10, 10, 10, 10
+                , 0, Color.argb(55,44,51,47), R.mipmap.eye_close, R.mipmap.eye_open));
+        Lcat.print(String.valueOf(Color.BLUE));
+        Lcat.print(String.valueOf(R.color.colorPrimary));
+        Lcat.print(String.valueOf("#124"));
+        Lcat.print(String.valueOf(Color.rgb(255, 255, 255)));
+        Lcat.print(String.valueOf(Color.argb(55,44,51,47)));
         return tabItemViews;
     }
 
