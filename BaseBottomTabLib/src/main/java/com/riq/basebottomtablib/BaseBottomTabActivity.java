@@ -84,12 +84,17 @@ public abstract class BaseBottomTabActivity extends AppCompatActivity {
                 onSecondClick();
             }
         });
-        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, setBottomTabHeight());
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(this, setBottomTabHeight()));
         btvTab.setLayoutParams(params);
     }
 
+    /**
+     * 设置底部栏的高度
+     *
+     * @return 默认50dp
+     */
     public int setBottomTabHeight() {
-        return dip2px(this,50);
+        return 50;
     }
 
     /**
@@ -146,12 +151,6 @@ public abstract class BaseBottomTabActivity extends AppCompatActivity {
     }
 
 
-    private int iconRes;
-    private int iconWidth;
-    private int iconHeight;
-    private int leftMargin;
-    private int rightMargin;
-
     /**
      * 设置CenterView按钮
      *
@@ -162,6 +161,12 @@ public abstract class BaseBottomTabActivity extends AppCompatActivity {
      * @param rightMargin 图片右Margin
      * @return
      */
+    private int iconRes;
+    private int iconWidth;
+    private int iconHeight;
+    private int leftMargin;
+    private int rightMargin;
+
     public View setCenterView(int iconRes, int iconWidth, int iconHeight, int leftMargin, int rightMargin) {
         this.iconRes = iconRes;
         this.iconWidth = iconWidth;
@@ -235,13 +240,4 @@ public abstract class BaseBottomTabActivity extends AppCompatActivity {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-
-    /**
-     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
-     */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
-
 }

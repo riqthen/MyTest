@@ -52,7 +52,6 @@ public class BottomTabView extends LinearLayout {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -62,7 +61,6 @@ public class BottomTabView extends LinearLayout {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -85,32 +83,23 @@ public class BottomTabView extends LinearLayout {
      * 设置 Tab Item View
      */
     public void setTabItemViews(List<TabItemView> tabItemViews, View centerView) {
-
         if (this.tabItemViews != null) {
             throw new RuntimeException("不能重复设置！");
         }
-
         if (tabItemViews == null || tabItemViews.size() < 2) {
             throw new RuntimeException("TabItemView 的数量必须大于2！");
         }
-
         this.tabItemViews = tabItemViews;
         for (int i = 0; i < tabItemViews.size(); i++) {
-
             if (centerView != null && i == tabItemViews.size() / 2) {
                 this.addView(centerView);
             }
-
             final TabItemView tabItemView = tabItemViews.get(i);
-
             this.addView(tabItemView);
-
             final int finalI = i;
-
             tabItemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (finalI == lastPosition) {
                         // 第二次点击
                         if (onSecondSelectListener != null) {
@@ -118,9 +107,7 @@ public class BottomTabView extends LinearLayout {
                         }
                         return;
                     }
-
                     updatePosition(finalI);
-
                     if (onTabItemSelectListener != null) {
                         onTabItemSelectListener.onTabItemSelect(finalI);
                     }
@@ -159,8 +146,8 @@ public class BottomTabView extends LinearLayout {
         }
     }
 
-    OnTabItemSelectListener onTabItemSelectListener;
-    OnSecondSelectListener onSecondSelectListener;
+    private OnTabItemSelectListener onTabItemSelectListener;
+    private OnSecondSelectListener onSecondSelectListener;
 
     public void setOnTabItemSelectListener(OnTabItemSelectListener onTabItemSelectListener) {
         this.onTabItemSelectListener = onTabItemSelectListener;
@@ -185,8 +172,6 @@ public class BottomTabView extends LinearLayout {
     }
 
 
-
-
     /**
      * Item
      */
@@ -195,31 +180,27 @@ public class BottomTabView extends LinearLayout {
         /**
          * 两个状态 选中、未选中
          */
+        public final static int DEFAULT = 0;
         public final static int PRESS = 1;
-        public final static int DEFAULT = 2;
 
         /**
          * Item 的标题
          */
         public String title;
-        private int leftPadding;
-        private int topPadding;
-        private int rightPadding;
-        private int bottomPadding;
         /**
          * 标题的两个状态的颜色 选中、未选中
          */
-        public int colorDef;
-        public int colorPress;
+        public int textColorDefault;    //默认文字颜色
+        public int textColorPress;      //点击后的颜色
 
         /**
          * 两个图标的 资源 id ，选中、未选中
          */
-        public int iconResDef;
-        public int iconResPress;
+        public int iconResDefault;      //默认图标
+        public int iconResPress;        //点击后图标
 
-        public TextView tvTitle;
-        public ImageView ivIcon;
+        public TextView tvTitle;        //文字
+        public ImageView ivIcon;        //图标
 
         public TabItemView(Context context) {
             super(context);
@@ -227,36 +208,26 @@ public class BottomTabView extends LinearLayout {
 
         /**
          * @param title          标题
-         * @param colorDefault   标题默认颜色
-         * @param colorPress     标题被选中时的颜色
+         * @param leftPadding    图标padding
+         * @param textColorDefault   标题默认颜色
+         * @param textColorPress     标题被选中时的颜色
          * @param iconResDefault 默认图标
          * @param iconResPress   被选中时的图标
          */
-        public TabItemView(Context context, String title, int leftPadding, int topPadding, int rightPadding, int bottomPadding,int colorDefault, int colorPress,
-                           int iconResDefault, int iconResPress) {
+        public TabItemView(Context context, String title, int leftPadding, int topPadding, int rightPadding
+                , int bottomPadding, int textColorDefault, int textColorPress, int iconResDefault, int iconResPress) {
             super(context);
+
             this.title = title;
-
-            this.leftPadding = leftPadding;
-            this.topPadding = topPadding;
-            this.rightPadding = rightPadding;
-            this.bottomPadding = bottomPadding;
-
-            this.colorDef = colorDefault;
-            this.colorPress = colorPress;
-            this.iconResDef = iconResDefault;
+            this.textColorDefault = textColorDefault;
+            this.textColorPress = textColorPress;
+            this.iconResDefault = iconResDefault;
             this.iconResPress = iconResPress;
-            init();
-        }
-
-        /**
-         * 初始化
-         */
-        public void init() {
             View view = LayoutInflater.from(super.getContext()).inflate(R.layout.view_tab_item, this);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-
+            // TODO: 2017/5/20 只显示图标不显示文本 
+//            tvTitle.setVisibility(GONE);
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
             view.setLayoutParams(layoutParams);
@@ -264,17 +235,12 @@ public class BottomTabView extends LinearLayout {
             view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
         }
 
-
-
-
-
         /**
          * 设置状态
          */
-        public void setStatus(int status) {
-            tvTitle.setTextColor(ContextCompat.getColor(super.getContext(), status == PRESS ? colorPress : colorDef));
-            ivIcon.setImageResource(status == PRESS ? iconResPress : iconResDef);
+        private void setStatus(int status) {
+            tvTitle.setTextColor(ContextCompat.getColor(super.getContext(), status == PRESS ? textColorPress : textColorDefault));
+            ivIcon.setImageResource(status == PRESS ? iconResPress : iconResDefault);
         }
     }
-
 }

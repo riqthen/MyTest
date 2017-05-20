@@ -15,8 +15,8 @@ public class Main11Activity extends BaseBottomTabActivity {
     @Override
     protected List<BottomTabView.TabItemView> getTabViews() {
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
-        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_open, R.mipmap.eye_close));
-        tabItemViews.add(new BottomTabView.TabItemView(this, "hello2", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_open, R.mipmap.eye_close));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "hello2", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
         return tabItemViews;
     }
 

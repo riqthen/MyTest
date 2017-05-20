@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.riq.basebottomtabactivitylib.com.riq.basebottomtablib.BaseBottomTabActivity">
+    tools:context="com.riq.basebottomtablib.BaseBottomTabActivity">
 
 
     <com.riq.basebottomtablib.MyViewPager
@@ -18,6 +18,6 @@
     <com.riq.basebottomtablib.BottomTabView
         android:id="@+id/btv_tab"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="50dp" /> <!--Bottom的高度-->
 
 </LinearLayout>
