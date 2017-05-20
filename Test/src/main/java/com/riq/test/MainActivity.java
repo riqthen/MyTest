@@ -15,7 +15,7 @@ public class MainActivity extends BaseBottomTabActivity {
     @Override
     protected List<BottomTabView.TabItemView> getTabViews() {
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
-        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10, 0, R.color.colorAccent, 0, R.mipmap.eye_open));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "hello", 10, 10, 10, 10, 0, 0, 0, 0));
         tabItemViews.add(new BottomTabView.TabItemView(this, "h2", 10, 10, 10, 10, R.color.colorPrimary, R.color.colorAccent, R.mipmap.eye_close, R.mipmap.eye_open));
         return tabItemViews;
     }
@@ -46,5 +46,11 @@ public class MainActivity extends BaseBottomTabActivity {
     @Override
     public void onSecondClick() {
         ToastUtils.showToast(this, "再次点击");
+    }
+
+
+    @Override
+    public boolean isVpScrollable() {
+        return true;
     }
 }
