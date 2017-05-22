@@ -24,8 +24,11 @@
         <activity android:name=".zxingLibrary.Main7Activity" />
         <activity android:name=".zxing.Main8Activity" />
         <activity android:name=".bottomtab.Main9Activity" />
-        <activity android:name=".bottomtab2.Main10Activity"></activity>
-        <activity android:name=".Main11Activity">
+        <activity android:name=".bottomtab2.Main10Activity" />
+        <activity android:name=".Main11Activity"></activity>
+        <activity
+            android:name=".Main12Activity"
+            android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

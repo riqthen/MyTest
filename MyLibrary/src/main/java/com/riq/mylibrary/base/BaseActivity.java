@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by riq on 2017/4/27.
- * Toolbar: 默认隐藏Toolbar,给Toolbar设置图标文字等则会显示Toolbar  !需要在布局中include引用toolbar布局文件layout_toolbar.xml
+ * Toolbar: 默认隐藏Toolbar,给Toolbar设置图标文字等则会显示Toolbar  !隐藏系统title栏，在布局中include引用toolbar布局文件layout_toolbar.xml
  * showToast: 自定义toast,背景文件为toast_bg.xml
  * showProgress: 显示ProgressDialog
  * checkNetworkIsAvailable: 检查是否有网络
