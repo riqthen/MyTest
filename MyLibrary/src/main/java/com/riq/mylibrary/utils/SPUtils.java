@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Update by riq on 2017/5/8.
+ * Update by dreamriq on 2017/5/8.
  * 使用方法:
  * 在当前Activity中 SPUtils.getInstance().init(); 可以在该方法中设置sp的文件名
  * 储存获取的方法 SPUtils.getInstance().saveString()  SPUtils.getInstance().getString()
@@ -73,6 +73,11 @@ public class SPUtils {
         return editor.commit();
     }
 
+    public boolean getBoolean(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, true);
+    }
+
     public boolean getBoolean(String key, boolean defaultVal) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, defaultVal);
@@ -108,6 +113,11 @@ public class SPUtils {
         return sharedPreferences.getString(key, "");
     }
 
+    public String getString(String key, String defaultValue, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getString(key, defaultValue);
+    }
+
     // -------------> int
     public boolean saveInt(String key, int value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
@@ -131,6 +141,11 @@ public class SPUtils {
     public int getInt(String key, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getInt(key, 0);
+    }
+
+    public int getInt(String key, int defaultValue, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getInt(key, defaultValue);
     }
 
 
@@ -159,6 +174,11 @@ public class SPUtils {
         return sharedPreferences.getFloat(key, 0);
     }
 
+    public double getFloat(String key, float defaultValue, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getFloat(key, defaultValue);
+    }
+
     // -------------> long
     public boolean saveLong(String key, long value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
@@ -184,6 +204,11 @@ public class SPUtils {
         return sharedPreferences.getLong(key, 0);
     }
 
+    public double getLong(String key, long defaultValue, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getLong(key, defaultValue);
+    }
+
     // -------------> Set<String>
     public boolean saveSet(String key, Set<String> value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
@@ -207,6 +232,11 @@ public class SPUtils {
     public Set<String> getSet(String key, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getStringSet(key, new HashSet<String>());
+    }
+
+    public Set<String> getSet(String key, Set<String> strings, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getStringSet(key, strings);
     }
 
 
