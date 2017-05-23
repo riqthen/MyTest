@@ -19,14 +19,12 @@ public class SPUtils {
     private static SPUtils spUtils;
     private Context mContext;
     private String spName;   //保存的文件名
-    private String defaultSpName = "DEFAULT_NAME";   //默认文件名
 
-    //初始化,用于获取当前context
-    public void init(Context context) {
-        this.mContext = context;
-    }
-
+    //初始化,用于获取当前context,并设置sp名称
     public void init(Context context, String spName) {
+        if (null == context) {
+            throw new RuntimeException("Must be use init(context) in Activity");
+        }
         this.mContext = context;
         this.spName = spName;
     }
@@ -44,55 +42,71 @@ public class SPUtils {
 //    }
 //
 //    public String getSpName() {
-//        return spName == null ? defaultSpName : spName;
+//        return spName;
 //    }
 
-
-    // -------------> 清除某个sp
+    //清除某个sp
     public boolean clearSp(String spName) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
-        return sharedPreferences.edit().clear().commit();
-    }
-
-    public boolean clearSp() { //清除默认sp
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(defaultSpName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.edit().clear().commit();
     }
 
     // -------------> boolean
     public boolean saveBoolean(String key, boolean value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        return editor.commit();
+    }
+
+    //保存到指定sp中
+    public boolean saveBoolean(String key, boolean value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
         return editor.commit();
     }
 
     public boolean getBoolean(String key, boolean defaultVal) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, defaultVal);
     }
 
     // -------------> String
     public boolean saveString(String key, String value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        return editor.commit();
+    }
+
+    public boolean saveString(String key, String value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         return editor.commit();
     }
 
     public String getString(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getString(key, "");
     }
 
     // -------------> int
     public int getInt(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getInt(key, 0);
     }
 
     public boolean saveInt(String key, int value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        return editor.commit();
+    }
+
+    public boolean saveInt(String key, int value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
         return editor.commit();
@@ -100,40 +114,61 @@ public class SPUtils {
 
     // -------------> float
     public boolean saveFloat(String key, float value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(key, value);
+        return editor.commit();
+    }
+
+    public boolean saveFloat(String key, float value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(key, value);
         return editor.commit();
     }
 
     public double getFloat(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(key, 0);
     }
 
     // -------------> long
     public boolean saveLong(String key, long value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
+        return editor.commit();
+    }
+
+    public boolean saveLong(String key, long value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(key, value);
         return editor.commit();
     }
 
     public double getLong(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getLong(key, 0);
     }
 
     // -------------> Set<String>
-    public boolean setSet(String key, Set<String> value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+    public boolean saveSet(String key, Set<String> value) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet(key, value);
+        return editor.commit();
+    }
+
+    public boolean saveSet(String key, Set<String> value, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(key, value);
         return editor.commit();
     }
 
     public Set<String> getSet(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName == null ? defaultSpName : spName, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getStringSet(key, new HashSet<String>());
     }
 
