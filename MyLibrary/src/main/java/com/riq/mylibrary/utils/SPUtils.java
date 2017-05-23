@@ -21,6 +21,13 @@ public class SPUtils {
     private String spName;   //保存的文件名
 
     //初始化,用于获取当前context,并设置sp名称
+    public void init(Context context) { //在onCreate里面初始化，为了得到context
+        if (null == context) {
+            throw new RuntimeException("Must be use init(context) in Activity");
+        }
+        this.mContext = context;
+    }
+
     public void init(Context context, String spName) {
         if (null == context) {
             throw new RuntimeException("Must be use init(context) in Activity");
@@ -59,7 +66,6 @@ public class SPUtils {
         return editor.commit();
     }
 
-    //保存到指定sp中
     public boolean saveBoolean(String key, boolean value, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -68,6 +74,11 @@ public class SPUtils {
     }
 
     public boolean getBoolean(String key, boolean defaultVal) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, defaultVal);
+    }
+
+    public boolean getBoolean(String key, boolean defaultVal, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, defaultVal);
     }
@@ -92,12 +103,12 @@ public class SPUtils {
         return sharedPreferences.getString(key, "");
     }
 
-    // -------------> int
-    public int getInt(String key) {
+    public String getString(String key, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
-        return sharedPreferences.getInt(key, 0);
+        return sharedPreferences.getString(key, "");
     }
 
+    // -------------> int
     public boolean saveInt(String key, int value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -111,6 +122,17 @@ public class SPUtils {
         editor.putInt(key, value);
         return editor.commit();
     }
+
+    public int getInt(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getInt(key, 0);
+    }
+
+    public int getInt(String key, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Activity.MODE_PRIVATE);
+        return sharedPreferences.getInt(key, 0);
+    }
+
 
     // -------------> float
     public boolean saveFloat(String key, float value) {
@@ -128,6 +150,11 @@ public class SPUtils {
     }
 
     public double getFloat(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getFloat(key, 0);
+    }
+
+    public double getFloat(String key, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(key, 0);
     }
@@ -152,6 +179,11 @@ public class SPUtils {
         return sharedPreferences.getLong(key, 0);
     }
 
+    public double getLong(String key, String spName) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getLong(key, 0);
+    }
+
     // -------------> Set<String>
     public boolean saveSet(String key, Set<String> value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
@@ -168,6 +200,11 @@ public class SPUtils {
     }
 
     public Set<String> getSet(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        return sharedPreferences.getStringSet(key, new HashSet<String>());
+    }
+
+    public Set<String> getSet(String key, String spName) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         return sharedPreferences.getStringSet(key, new HashSet<String>());
     }
