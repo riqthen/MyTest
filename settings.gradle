@@ -1,1 +1,1 @@
-include ':app', ':MyLibrary', ':BaseBottomTabLib', ':Test'
+include ':app', ':MyLibrary', ':BaseBottomTabLib', ':Test', ':TestVolley'
