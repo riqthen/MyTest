@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                 String rawCookies = responseHeaders.get("Set-Cookie");
                 //Constant是一个自建的类，存储常用的全局变量
                 MyApp.localCookie = rawCookies.substring(0, rawCookies.indexOf(";"));
-                Lcat.print("sessionid", "sessionid----------------" + MyApp.localCookie);
+                Lcat.print("session_id", MyApp.localCookie); // JSESSIONID=FA5BD406B934194DCEF85B015BEF52E6
                 return superResponse;
             }
         };
