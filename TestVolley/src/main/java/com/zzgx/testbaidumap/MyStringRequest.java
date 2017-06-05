@@ -1,4 +1,4 @@
-package com.riq.test;
+package com.zzgx.testbaidumap;
 
 
 import com.android.volley.AuthFailureError;
@@ -67,7 +67,8 @@ public class MyStringRequest extends StringRequest {
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = super.getHeaders();
         if (headers == null || headers.equals(Collections.emptyMap())) {
-            headers = new HashMap<String, String>();
+            headers = new HashMap<>();
+
         }
         MyApp.getInstance().addSessionCookie(headers);
         return headers;
