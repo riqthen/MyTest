@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 et.setText(getLocalIpAddress());
+                Lcat.print(222);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
