@@ -1,12 +1,8 @@
-package com.riq.mylibrary.base;
+package com.riq.base;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,14 +10,11 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.riq.mylibrary.R;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -41,12 +34,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     private TextView tvToolbarTitle;
     private TextView btnToolbarRight;
     private Toolbar toolbar;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initToolbar();
         initView();
     }
@@ -142,7 +136,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * 设置Toolbar背景颜色
      *
@@ -179,36 +172,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onClickToolbarRightItem(View v) {
     }
 
-    // TODO: 2017/5/2 --------------------------> Toast
-    private Toast toast;
-
-    /**
-     * 显示Toast
-     *
-     * @param msg 需要Toast的信息
-     */
-    public void showToast(String msg) {
-        toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 200);   //200表示距离屏幕底部的距离
-        TextView textView = new TextView(this);
-        textView.setText(msg);
-        textView.setTextSize(14);
-        textView.setTextColor(Color.WHITE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            textView.setBackground(getResources().getDrawable(R.drawable.toast_bg));
-        }
-        toast.setView(textView);
-        toast.show();
-    }
-
-    /**
-     * 隐藏Toast
-     */
-    public void hideToast() {
-        if (null != toast) {
-            toast.cancel();
-        }
-    }
 
     // TODO: 2017/5/2 --------------------------> ProgressDialog
     private boolean isActive = false;
@@ -251,30 +214,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    // TODO: 2017/5/2 --------------------------> 检查网络是否可用
-
-    public static boolean checkNetworkIsAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity == null) {
-            return false;
-        } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        NetworkInfo netWorkInfo = info[i];
-                        if (netWorkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                            return true;
-                        } else if (netWorkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -287,4 +226,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         isActive = false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
 }

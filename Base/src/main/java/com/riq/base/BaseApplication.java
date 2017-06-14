@@ -1,4 +1,4 @@
-package com.riq.mylibrary.base;
+package com.riq.base;
 
 import android.app.Activity;
 import android.app.Application;
