@@ -27,10 +27,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(':MyLibrary')
+    compile project(':SlideLibrary')
+    compile project(':BaseBottomTabLib')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile project(':MyLibrary')
+    compile 'com.github.lygttpod:SuperTextView:1.1.2'   //SuperTextView --> http://www.jianshu.com/p/1a5303258754
+    compile 'com.youth.banner:banner:1.4.9' //ViewPager --> https://github.com/youth5201314/banner
+    compile 'com.github.Cutta:GifView:1.1'  //GifView --> https://github.com/Cutta/GifView
+    testCompile 'junit:junit:4.12'
 }

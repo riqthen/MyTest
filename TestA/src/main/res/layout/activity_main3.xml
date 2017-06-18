@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.riq.testa.SuperTextView.Main3Activity">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sLeftBottomTextColor="@color/gray"
+        app:sLeftBottomTextColor2="@color/colorAccent"
+        app:sLeftBottomTextString="招商银行（8888）"
+        app:sLeftBottomTextString2="限额说明>>"
+        app:sLeftIconRes="@mipmap/ic_launcher_round"
+        app:sLeftTopTextString="银行卡支付"
+        app:sLineShow="bottom"
+        app:sRightCheckBoxRes="@mipmap/clear_pressed"
+        app:sRightCheckBoxShow="true" />
+</LinearLayout>

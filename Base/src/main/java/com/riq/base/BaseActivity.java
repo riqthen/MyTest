@@ -20,15 +20,10 @@ import butterknife.Unbinder;
 /**
  * Created by riq on 2017/4/27.
  * Toolbar: 默认隐藏Toolbar,给Toolbar设置图标文字等则会显示Toolbar  !隐藏系统title栏，在布局中include引用toolbar布局文件layout_toolbar.xml
- * showToast: 自定义toast,背景文件为toast_bg.xml
- * showProgress: 显示ProgressDialog
- * checkNetworkIsAvailable: 检查是否有网络
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    {
-        BaseApplication.addActivity(this);
-    }
+
 
     private TextView btnToolbarLeft;
     private TextView tvToolbarTitle;
@@ -41,7 +36,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
         unbinder = ButterKnife.bind(this);
-        initToolbar();
+        btnToolbarLeft = (TextView) findViewById(R.id.btn_toolbar_left);
+        btnToolbarRight = (TextView) findViewById(R.id.btn_toolBar_right);
+        tvToolbarTitle = (TextView) findViewById(R.id.tv_toolBar_title);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         initView();
     }
 
@@ -49,33 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 加载视图R.layout.
      */
     protected abstract int getLayoutRes();
-
-
-    /**
-     * 找到Toolbar中的组件及配置点击事件
-     */
-    private void initToolbar() {
-        btnToolbarLeft = (TextView) findViewById(R.id.btn_toolbar_left);
-        btnToolbarRight = (TextView) findViewById(R.id.btn_toolBar_right);
-        tvToolbarTitle = (TextView) findViewById(R.id.tv_toolBar_title);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (null != btnToolbarLeft) {
-            btnToolbarLeft.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickToolbarLeftItem(v);
-                }
-            });
-        }
-        if (null != btnToolbarRight) {
-            btnToolbarRight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickToolbarRightItem(v);
-                }
-            });
-        }
-    }
 
     /**
      * 初始化视图,包括Toolbar
@@ -104,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param resId 资源Id
      * @param text  文本
      */
-    protected void setToolbarLeftItem(@DrawableRes int resId, String text) {
+    protected void setToolbarLeftItem(@DrawableRes int resId, String text, final OnItemClickListener onItemClickListener) {
         if (toolbar != null) {
             toolbar.setVisibility(View.VISIBLE);
             if (resId > 0) {
@@ -114,6 +85,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                 btnToolbarLeft.setCompoundDrawables(drawable, null, null, null);
             }
             btnToolbarLeft.setText(text);
+            if (null != btnToolbarLeft) {
+                btnToolbarLeft.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onClick();
+                    }
+                });
+            }
         }
     }
 
@@ -123,7 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param resId R.mipmap.
      * @param text  文本
      */
-    protected void setToolbarRightItem(@DrawableRes int resId, String text) {
+    protected void setToolbarRightItem(@DrawableRes int resId, String text, final OnItemClickListener onItemClickListener) {
         if (toolbar != null) {
             toolbar.setVisibility(View.VISIBLE);
             if (resId > 0) {
@@ -133,6 +112,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                 btnToolbarRight.setCompoundDrawables(null, null, drawable, null);
             }
             btnToolbarRight.setText(text);
+            if (null != btnToolbarRight) {
+                btnToolbarRight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onClick();
+                    }
+                });
+            }
         }
     }
 
@@ -156,20 +143,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor(colorStr));
     }
 
-    /**
-     * 左按钮的点击事件
-     *
-     * @param v
-     */
-    public void onClickToolbarLeftItem(View v) {
-    }
 
-    /**
-     * 右按钮的点击事件
-     *
-     * @param v
-     */
-    public void onClickToolbarRightItem(View v) {
+    public interface OnItemClickListener {
+        void onClick();
     }
 
 

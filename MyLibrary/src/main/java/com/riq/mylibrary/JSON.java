@@ -1,4 +1,4 @@
-package com.riq.mylibrary.volleyutils;
+package com.riq.mylibrary;
 
 import android.text.TextUtils;
 

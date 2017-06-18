@@ -6,7 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/BaseBottomTabLib/BaseBottomTabLib.iml" filepath="$PROJECT_DIR$/BaseBottomTabLib/BaseBottomTabLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyLibrary/MyLibrary.iml" filepath="$PROJECT_DIR$/MyLibrary/MyLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyTest.iml" filepath="$PROJECT_DIR$/MyTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlideLibrary/SlideLibrary.iml" filepath="$PROJECT_DIR$/SlideLibrary/SlideLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestA/TestA.iml" filepath="$PROJECT_DIR$/TestA/TestA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestB/TestB.iml" filepath="$PROJECT_DIR$/TestB/TestB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

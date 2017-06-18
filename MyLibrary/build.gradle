@@ -29,16 +29,18 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.github.bumptech.glide:glide:3.8.0'
     //butterknife 不起作用
     compile 'com.jakewharton:butterknife:8.6.0'
     apt 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.android.support:design:25.3.1'
     compile 'com.github.andyxialm:ColorDialog:1.0.0'    //ColorDialog --> https://github.com/andyxialm/ColorDialog
     compile 'com.afollestad.material-dialogs:commons:0.9.4.4'    //material-dialogs --> https://github.com/afollestad/material-dialogs#coloring-radio-buttons
-    compile 'com.github.lazylibrary:lazylibrary:1.0.2'  //常用的工具类 --> https://github.com/l123456789jy/Lazy
-    compile 'com.zhy:mpermission-api:1.0.0'
+    compile 'com.zhy:mpermission-api:1.0.0' //动态权限MPermission --> http://blog.csdn.net/lmj623565791/article/details/50709663?locationNum=1&fps=1
     compile 'com.zhy:mpermission-compiler:1.0.0'
+    compile 'com.apkfuns.xprogressdialog:xprogressdialog:1.2.0' //XProgressDialog --> https://github.com/pengwei1024/XProgressDialog
+    compile 'com.github.lygttpod:SuperTextView:1.1.2'   //SuperTextView --> http://www.jianshu.com/p/1a5303258754
+    compile 'com.flowerfat.volleyutil:volleyutil:0.3.4' //volley封装 --> https://github.com/mBigFlower/volley-utils
 
 }

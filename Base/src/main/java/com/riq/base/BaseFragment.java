@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.riq.mylibrary.R;
 
 
 public abstract class BaseFragment extends Fragment {
@@ -96,14 +95,7 @@ public abstract class BaseFragment extends Fragment {
     public void onClickToolbarRightItem(View v) {
     }
 
-    //------------------> Toast
-    public void showToast(String msg) {
-        getBaseActivity().showToast(msg);
-    }
 
-    public void hideToast() {
-        getBaseActivity().hideToast();
-    }
 
     //------------------> ProgressDialog
     public void showProgress(String title, String msg, boolean touchOutsideCancelable, boolean isCancelable) {

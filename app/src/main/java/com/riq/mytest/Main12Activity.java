@@ -1,6 +1,7 @@
 package com.riq.mytest;
 
-import com.riq.mylibrary.base.BaseActivity;
+
+import com.riq.base.BaseActivity;
 
 public class Main12Activity extends BaseActivity {
 
